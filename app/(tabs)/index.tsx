@@ -1,11 +1,25 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform, TouchableOpacity ,Text} from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { useRouter } from 'expo-router';
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}:any) {
+  const router :any = useRouter()
+  const handleNavigate = () => {
+    router.push({
+      pathname: '/page/hallo',
+      params: {
+        name: 'Yandi',
+        age: 25,
+        data:[
+          {sandi:"hallo",dimana:"haiiii"}
+        ]
+      },
+    });
+  };
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -46,6 +60,9 @@ export default function HomeScreen() {
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
       </ThemedView>
+      <TouchableOpacity onPress={handleNavigate}>
+      <Text>Go to Hello</Text>
+    </TouchableOpacity>
     </ParallaxScrollView>
   );
 }
