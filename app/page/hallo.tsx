@@ -13,6 +13,7 @@ import "nativewind/types.d"; // Tambahkan ini
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import ModalComponent from "./component/ModalComponent";
 import { Dimensions } from "react-native";
+import MenuGrid from "./menu";
 
 const { width, height } = Dimensions.get("window");
 const hallo = () => {
@@ -50,11 +51,13 @@ const hallo = () => {
             Mas Ali thop sang petualang cinta
           </Text>
         </TouchableOpacity>
-    
       </Animated.View>
 
       {/* <View className=' bg-blue-500'></View>
       <Text>Hasllloddaddddda</Text> */}
+      <View style={{ marginHorizontal: 30 }}>
+        <MenuGrid />
+      </View>
     </View>
   );
 };

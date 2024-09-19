@@ -10,7 +10,7 @@ export default function HomeScreen({navigation}:any) {
   const router :any = useRouter()
   const handleNavigate = () => {
     router.push({
-      pathname: '/page/hallo',
+      pathname: 'login',
       params: {
         name: 'Yandi',
         age: 25,
