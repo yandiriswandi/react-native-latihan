@@ -2,29 +2,35 @@ import DividerText from "@/components/DividerText";
 import HeaderStatuBar from "@/components/HeaderStatuBar";
 import StyledTextInput from "@/components/StyledTextInput";
 import { COLORS, SIZES } from "@/constants/theme";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import React, { useState } from "react";
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Animated, {
   FadeIn,
   FadeInDown,
   FadeInUp,
   SlideInLeft,
-  SlideInRight
+  SlideInRight,
 } from "react-native-reanimated";
+import Google from "../../assets/images/google.svg";
 
 const index = () => {
   const [visible, setVisible] = useState(false);
+  const router: any = useRouter();
+
+  const handleNavigate = () => {
+    router.push({
+      pathname: "register",
+      params: {
+        name: "Yandi",
+        age: 25,
+        data: [{ sandi: "hallo", dimana: "haiiii" }],
+      },
+    });
+  };
   return (
     <GestureHandlerRootView>
-      {/* content */}
       <Stack.Screen options={{ headerShown: false }}></Stack.Screen>
       <HeaderStatuBar />
       <View style={styles.container}>
@@ -95,7 +101,7 @@ const index = () => {
         </Animated.View>
         <Animated.View entering={SlideInRight.delay(100).duration(800)}>
           <TouchableOpacity style={styles.buttonGoogle}>
-            <Image source={require("../../assets/images/google.png")} />
+            <Google />
             <Text
               style={{
                 fontFamily: "Poppins-Medium",
@@ -106,11 +112,14 @@ const index = () => {
             </Text>
           </TouchableOpacity>
         </Animated.View>
-        <Animated.View style={styles.bottomText} 
+        <Animated.View
+          style={styles.bottomText}
           entering={FadeInDown.delay(200).duration(1000).springify()}
-          >
+        >
           <Text style={styles.bottomTextOne}>Belum punya akun?</Text>
-          <Text style={styles.bottomTextTwo}>Buat akun disini</Text>
+          <TouchableOpacity onPress={handleNavigate}>
+            <Text style={styles.bottomTextTwo}>Buat akun disini</Text>
+          </TouchableOpacity>
         </Animated.View>
       </View>
     </GestureHandlerRootView>

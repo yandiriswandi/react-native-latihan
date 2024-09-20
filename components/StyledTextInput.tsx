@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     left: 10,
-    marginTop: -15,
+    marginTop: -13,
     backgroundColor: "#F9F9FB",
     padding: 4,
   },

@@ -22,6 +22,8 @@ export default function RootLayout() {
     "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
     "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
+    "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
+
   });
 
   useEffect(() => {
@@ -36,10 +38,10 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(login)" options={{ headerShown: false }} />
-        <Stack.Screen name="splashComponent" options={{ headerShown: false }} />
+      <Stack >
+        {/* <Stack.Screen name="splashComponent" options={{ headerShown: false }} /> */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="login/index" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
         {/* <Stack.Screen name="splashComponent" options={{ headerShown: false }}/> */}
       </Stack>
