@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import HeaderStatuBar from "@/components/HeaderStatuBar";
+import HeaderStatuBar from "@/components/HeaderStatusBar";
 import StyledTextInput from "@/components/StyledTextInput";
 import { COLORS, SIZES } from "@/constants/theme";
 import { Stack } from "expo-router";

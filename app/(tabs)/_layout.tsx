@@ -1,37 +1,204 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import React from "react";
+import {
+  Alert,
+  Animated,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Text,
+} from "react-native";
+import { CurvedBottomBarExpo } from "react-native-curved-bottom-bar";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import HomeScreen from "./index";
+import { RFValue } from "react-native-responsive-fontsize";
+import QrCode from "../../assets/svg/bottomNavigator/qr.svg";
+import { COLORS } from "@/constants/theme";
+import HomeIcon from "../../assets/svg/bottomNavigator/home.svg";
+import InventoryIcon from "../../assets/svg/bottomNavigator/inventory.svg";
+import NotificationIcon from "../../assets/svg/bottomNavigator/notification.svg";
+import AccountIcon from "../../assets/svg/bottomNavigator/Account.svg";
+import HomeIconActive from "../../assets/svg/bottomNavigator/homeActive.svg";
+import InventoryIconActive from "../../assets/svg/bottomNavigator/inventoryActive.svg";
+import NotificationIconActive from "../../assets/svg/bottomNavigator/notificationActive.svg";
+import AccountIconActive from "../../assets/svg/bottomNavigator/AccountActive.svg";
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+const Screen1 = () => {
+  return <View style={styles.screen1} />;
+};
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+const Screen2 = () => {
+  return <View style={styles.screen2} />;
+};
+
+export default function App() {
+  const _renderIcon = (routeName: any, selectedTab: any) => {
+    let icon = "";
+
+    switch (routeName) {
+      case "Home":
+        return (
+          <>{selectedTab === "Home" ? <HomeIconActive /> : <HomeIcon />}</>
+        );
+
+      case "Notification":
+        return (
+          <>
+            {selectedTab === "Notification" ? (
+              <NotificationIconActive />
+            ) : (
+              <NotificationIcon />
+            )}
+          </>
+        );
+      case "Inventory":
+        return (
+          <>
+            {selectedTab === "Inventory" ? (
+              <InventoryIconActive />
+            ) : (
+              <InventoryIcon />
+            )}
+          </>
+        );
+      case "Account":
+        return (
+          <>
+            {selectedTab === "Account" ? (
+              <AccountIconActive />
+            ) : (
+              <AccountIcon />
+            )}
+          </>
+        );
+    }
+  };
+
+  const renderTabBar = ({ routeName, selectedTab, navigate }: any) => {
+    return (
+      <TouchableOpacity
+        onPress={() => navigate(routeName)}
+        style={styles.tabbarItem}
+      >
+        {_renderIcon(routeName, selectedTab)}
+        <Text
+          style={[
+            styles.textcolor,
+            { color: selectedTab === routeName ? "#0C293D" : "#7C7C7C" },
+          ]}
+        >
+          {routeName}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
+    <CurvedBottomBarExpo.Navigator
+      type="DOWN"
+      style={styles.bottomBar}
+      shadowStyle={styles.shawdow}
+      height={55}
+      circleWidth={50}
+      bgColor="#ECEFF1"
+      initialRouteName="title1"
+      borderTopLeftRight
+      renderCircle={({ selectedTab, navigate }) => (
+        <Animated.View style={styles.btnCircleUp}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => Alert.alert("Click Action")}
+          >
+            <QrCode />
+          </TouchableOpacity>
+        </Animated.View>
+      )}
+      tabBar={renderTabBar}
+    >
+      <CurvedBottomBarExpo.Screen
+        name="Home"
+        position="LEFT"
+        component={() => <HomeScreen />}
       />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
+      <CurvedBottomBarExpo.Screen
+        name="Inventory"
+        position="LEFT"
+        component={() => <HomeScreen />}
       />
-    </Tabs>
+      <CurvedBottomBarExpo.Screen
+        name="Notification"
+        component={() => <Screen2 />}
+        position="RIGHT"
+      />
+      <CurvedBottomBarExpo.Screen
+        name="Account"
+        component={() => <Screen2 />}
+        position="RIGHT"
+      />
+    </CurvedBottomBarExpo.Navigator>
   );
 }
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  shawdow: {
+    shadowColor: "#DDDDDD",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 5,
+  },
+  button: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  bottomBar: {},
+  btnCircleUp: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: COLORS.primary,
+    bottom: 30,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 1,
+  },
+  imgCircle: {
+    width: 30,
+    height: 30,
+    tintColor: "gray",
+  },
+  tabbarItem: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  img: {
+    width: 30,
+    height: 30,
+  },
+  screen1: {
+    flex: 1,
+    backgroundColor: "#BFEFFF",
+  },
+  screen2: {
+    flex: 1,
+    backgroundColor: "#FFEBCD",
+  },
+  textcolor: {
+    fontSize: RFValue(8),
+    fontFamily: "Poppins-Medium",
+    marginVertical: 5,
+  },
+});

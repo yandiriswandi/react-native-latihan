@@ -1,77 +1,65 @@
-import { Image, StyleSheet, Platform, TouchableOpacity ,Text} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+  Text,
+  View,
+  ScrollView,
+} from "react-native";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { useRouter } from 'expo-router';
+import { HelloWave } from "@/components/HelloWave";
+import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+import { Stack, useRouter } from "expo-router";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import HeaderStatusBar from "@/components/HeaderStatusBar";
+import CardHome from "@/components/CardHome";
+import MenuHome from "@/components/MenuHome";
+import Interset from "../../assets/svg/Intersect.svg";
+import ProductHome from "@/components/ProductHome";
+import { useEffect } from "react";
 
-export default function HomeScreen({navigation}:any) {
-  const router :any = useRouter()
+export default function HomeScreen({ navigation }: any) {
+  const router: any = useRouter();
   const handleNavigate = () => {
     router.push({
-      pathname: 'login',
+      pathname: "login",
       params: {
-        name: 'Yandi',
+        name: "Yandi",
         age: 25,
-        data:[
-          {sandi:"hallo",dimana:"haiiii"}
-        ]
+        data: [{ sandi: "hallo", dimana: "haiiii" }],
       },
     });
   };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-      <TouchableOpacity onPress={handleNavigate}>
-      <Text>Go to Hello</Text>
-    </TouchableOpacity>
-    </ParallaxScrollView>
+    <GestureHandlerRootView>
+      <ScrollView style={styles.container}>
+        <Stack.Screen options={{ headerShown: false }}></Stack.Screen>
+        <HeaderStatusBar />
+        <View style={styles.card}>
+          <CardHome />
+          <MenuHome />
+          <Interset style={{ marginTop: 100 }} />
+        </View>
+        <ProductHome />
+      </ScrollView>
+    </GestureHandlerRootView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  card: {
+    flex: 1,
+    padding: 30,
+    backgroundColor: "white",
+  },
+  container: {
+    flex: 1,
+    paddingBottom: 40,
+    backgroundColor: "white",
   },
   stepContainer: {
     gap: 8,
@@ -82,6 +70,6 @@ const styles = StyleSheet.create({
     width: 290,
     bottom: 0,
     left: 0,
-    position: 'absolute',
+    position: "absolute",
   },
 });

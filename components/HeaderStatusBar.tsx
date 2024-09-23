@@ -1,7 +1,7 @@
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const HeaderStatuBar = () => {
+const HeaderStatusBar = () => {
   const statusBarHeight = StatusBar.currentHeight || 0;
 
   return (
@@ -17,6 +17,6 @@ const HeaderStatuBar = () => {
   )
 }
 
-export default HeaderStatuBar
+export default HeaderStatusBar
 
 const styles = StyleSheet.create({})

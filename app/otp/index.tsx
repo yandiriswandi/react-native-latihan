@@ -1,4 +1,4 @@
-import HeaderStatuBar from "@/components/HeaderStatuBar";
+import HeaderStatuBar from "@/components/HeaderStatusBar";
 import { COLORS } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useRouter } from "expo-router";
@@ -57,7 +57,6 @@ const Otp = () => {
               alignItems: "center",
             }}
           >
-            {/* <Image source={require("../../assets/images/Password.png")}></Image> */}
             <PASS width={72} height={72} />
             <Text style={styles.textPassword}>Input OTP</Text>
           </Animated.View>

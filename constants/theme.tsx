@@ -1,6 +1,8 @@
 import { Dimensions } from "react-native";
 
 const { width, height } = Dimensions.get('screen');
+const isTablet = Math.min(width, height) >= 600;
+
 
 export const COLORS = {
     primary: '#EF4C2D',
@@ -23,4 +25,5 @@ export const SIZES = {
 
     width,
     height,
+    isTablet:isTablet
 }

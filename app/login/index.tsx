@@ -1,5 +1,5 @@
 import DividerText from "@/components/DividerText";
-import HeaderStatuBar from "@/components/HeaderStatuBar";
+import HeaderStatuBar from "@/components/HeaderStatusBar";
 import StyledTextInput from "@/components/StyledTextInput";
 import { COLORS, SIZES } from "@/constants/theme";
 import { Stack, useRouter } from "expo-router";
@@ -14,6 +14,7 @@ import Animated, {
   SlideInRight,
 } from "react-native-reanimated";
 import Google from "../../assets/images/google.svg";
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const index = () => {
   const [visible, setVisible] = useState(false);
@@ -67,7 +68,7 @@ const index = () => {
         <Text
           style={{
             fontFamily: "Poppins-Regular",
-            fontSize: 12,
+            fontSize: RFValue(12),
             color: COLORS.grey_100,
             paddingLeft: 20,
           }}
@@ -80,7 +81,7 @@ const index = () => {
               style={{
                 fontFamily: "Poppins-Medium",
                 color: "white",
-                fontSize: 13,
+                fontSize: RFValue(13),
               }}
             >
               masuk
@@ -93,7 +94,7 @@ const index = () => {
         >
           <DividerText
             fontFamily="Poppins-Regular"
-            fontSizes={14}
+            fontSizes={RFValue(14)}
             text="atau"
             color={COLORS.grey_100}
             colorText={COLORS.grey_100}
@@ -105,7 +106,7 @@ const index = () => {
             <Text
               style={{
                 fontFamily: "Poppins-Medium",
-                fontSize: 13,
+                fontSize: RFValue(13),
               }}
             >
               Login with Google
@@ -136,11 +137,11 @@ const styles = StyleSheet.create({
   },
   textLogin: {
     fontFamily: "Poppins-SemiBold",
-    fontSize: SIZES.h3,
+    fontSize:RFValue(SIZES.h3),
   },
   textDescription: {
     fontFamily: "Poppins-Regular",
-    fontSize: SIZES.h6,
+    fontSize: RFValue( SIZES.h6),
     color: COLORS.grey_100,
     marginBottom: 20,
   },
@@ -162,7 +163,7 @@ const styles = StyleSheet.create({
   textTop: {
     color: COLORS.grey_100,
     fontFamily: "Poppins-Regular",
-    fontSize: 11,
+    fontSize: RFValue(11),
   },
   button: {
     backgroundColor: COLORS.primary,
@@ -191,11 +192,11 @@ const styles = StyleSheet.create({
   },
   bottomTextOne: {
     fontFamily: "Poppins-Regular",
-    fontSize: 12,
+    fontSize: RFValue(12),
   },
   bottomTextTwo: {
     fontFamily: "Poppins-SemiBold",
-    fontSize: 12,
+    fontSize: RFValue(12),
     color: COLORS.primary,
     textDecorationLine: "underline",
   },
