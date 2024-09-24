@@ -1,28 +1,43 @@
-import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
-import React from "react";
-import Product from "../assets/svg/mainmenuicon/product.svg";
-import Stock from "../assets/svg/mainmenuicon/stock.svg";
-import Invoice from "../assets/svg/mainmenuicon/invoice.svg";
-import Transaction from "../assets/svg/mainmenuicon/transaction.svg";
-import Customer from "../assets/svg/mainmenuicon/customerMenu.svg";
-import Report from "../assets/svg/mainmenuicon/reportMenu.svg";
 import { SIZES } from "@/constants/theme";
+import React from "react";
+import {
+  Dimensions,
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import Animated, { FadeInUp } from "react-native-reanimated";
 import { RFValue } from "react-native-responsive-fontsize";
-import Animated, { FadeIn, FadeInUp } from "react-native-reanimated";
-import { scale } from "react-native-size-scaling";
+import Customer from "../assets/svg/mainmenuicon/customerMenu.svg";
+import Invoice from "../assets/svg/mainmenuicon/invoice.svg";
+import Product from "../assets/svg/mainmenuicon/product.svg";
+import Report from "../assets/svg/mainmenuicon/reportMenu.svg";
+import Stock from "../assets/svg/mainmenuicon/stock.svg";
+import Transaction from "../assets/svg/mainmenuicon/transaction.svg";
+import { Router, useRouter } from "expo-router";
+interface typeData {
+  id: string;
+  name: string;
+  icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  empty?: boolean; // optional property
+  route?:string
+}
+const menuData = [
+  { id: "1", name: "Product", icon: Product, route: "product" },
+  { id: "2", name: "Stock", icon: Stock },
+  { id: "3", name: "Invoice", icon: Invoice },
+  { id: "4", name: "Transaction", icon: Transaction },
+  { id: "5", name: "Customer", icon: Customer },
+  { id: "7", name: "Report", icon: Report },
+];
 
 const MenuHome = () => {
-  const menuData = [
-    { id: "1", name: "Product", icon: Product },
-    { id: "2", name: "Stock", icon: Stock },
-    { id: "3", name: "Invoice", icon: Invoice },
-    { id: "4", name: "Transaction", icon: Transaction },
-    { id: "5", name: "Customer", icon: Customer },
-    { id: "7", name: "Report", icon: Report },
-  ];
   const numColumns = SIZES.isTablet ? 6 : 4;
   const screenWidth = Dimensions.get("window").width;
   const itemWidth = screenWidth / numColumns;
+  const router: any = useRouter();
 
   const formatData = (data: any, numColumns: any) => {
     const numberOfFullRows = Math.floor(data.length / numColumns);
@@ -40,7 +55,11 @@ const MenuHome = () => {
     return data;
   };
 
-  const renderItem = ({ item }: any) => {
+  const handleClick = (item: typeData) => {
+    router.push(item.route);
+  };
+
+  const renderItem = ({ item }: { item: typeData }) => {
     if (item.empty) {
       return <View style={[styles.menuItem, styles.invisible]} />;
     }
@@ -49,10 +68,12 @@ const MenuHome = () => {
         style={[styles.menuItem, { width: itemWidth }]}
         entering={FadeInUp.delay(200).duration(1000).springify()}
       >
-        <View style={styles.card}>
-          <item.icon style={styles.icon} />
-        </View>
-        <Text style={styles.menuText}>{item.name}</Text>
+        <TouchableOpacity onPress={() => handleClick(item)}>
+          <View style={styles.card}>
+            <item.icon style={styles.icon} />
+          </View>
+          <Text style={styles.menuText}>{item.name}</Text>
+        </TouchableOpacity>
       </Animated.View>
     );
   };

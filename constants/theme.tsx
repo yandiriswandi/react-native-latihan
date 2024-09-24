@@ -11,8 +11,10 @@ export const COLORS = {
     lightGrey: '#D3D6D6',
     grey: '#F5F5F5',
     grey_100:"#9E9E9E",
+    grey_200:"#D9D9D9",
     blue: '#087BB6',
     yellow: '#F4D03F',
+    mobile:"#f2f3f4"
 };
 
 export const SIZES = {
