@@ -1,25 +1,16 @@
 import {
-  Image,
-  StyleSheet,
-  Platform,
-  TouchableOpacity,
-  Text,
-  View,
   ScrollView,
+  StyleSheet,
+  View
 } from "react-native";
 
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import CardHome from "@/components/CardHome";
+import HeaderStatusBar from "@/components/HeaderStatusBar";
+import MenuHome from "@/components/MenuHome";
+import ProductHome from "@/components/ProductHome";
 import { Stack, useRouter } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import HeaderStatusBar from "@/components/HeaderStatusBar";
-import CardHome from "@/components/CardHome";
-import MenuHome from "@/components/MenuHome";
 import Interset from "../../assets/svg/Intersect.svg";
-import ProductHome from "@/components/ProductHome";
-import { useEffect } from "react";
 
 export default function HomeScreen({ navigation }: any) {
   const router: any = useRouter();

@@ -43,6 +43,7 @@ const Products = () => {
     price: false,
   });
 
+
   const renderItem = ({ item }: { item: filterType }) => {
     const handleClick = () => {
       setActive(item);
@@ -432,8 +433,8 @@ const styles = StyleSheet.create({
   close: {
     color: COLORS.primary,
     fontWeight: 600,
-    fontSize:20,
-    position:"absolute"
-    ,right:0
+    fontSize: 20,
+    position: "absolute",
+    right: 0,
   },
 });

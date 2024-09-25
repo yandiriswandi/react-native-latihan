@@ -28,7 +28,7 @@ const menuData = [
   { id: "1", name: "Product", icon: Product, route: "product" },
   { id: "2", name: "Stock", icon: Stock },
   { id: "3", name: "Invoice", icon: Invoice },
-  { id: "4", name: "Transaction", icon: Transaction },
+  { id: "4", name: "Transaction", icon: Transaction ,route: "cashier"},
   { id: "5", name: "Customer", icon: Customer },
   { id: "7", name: "Report", icon: Report },
 ];

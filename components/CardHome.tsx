@@ -14,7 +14,7 @@ const CardHome = () => {
           entering={FadeInUp.delay(200).duration(3000).springify()}
         >
           <Text style={styles.hello}>Hello,</Text>
-          <Text style={styles.name}>Fatah</Text>
+          <Text style={styles.name}>Yandi</Text>
           <Notif style={styles.notification} />
         </Animated.View>
         <Animated.View

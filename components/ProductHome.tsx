@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList, Image } from "react-native";
 import React from "react";
 import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS } from "@/constants/theme";
@@ -33,9 +33,12 @@ const ProductHome = () => {
               alignItems: "center",
             }}
           >
-            <View
-              style={{ width: 35, height: 35, backgroundColor: "grey" }}
-            ></View>
+            <Image
+              source={{
+                uri: "https://down-id.img.susercontent.com/file/id-11134201-7r991-lpkldt6ouwstcd",
+              }}
+              style={{ width: 35, height: 35, borderRadius: 5 }}
+            />
             <View>
               <Text style={styles.styleProductText}>Produk</Text>
               <View style={styles.containerTextProduct}>
@@ -56,9 +59,12 @@ const ProductHome = () => {
               alignItems: "center",
             }}
           >
-            <View
-              style={{ width: 35, height: 35, backgroundColor: "grey" }}
-            ></View>
+            <Image
+              source={{
+                uri: "https://down-id.img.susercontent.com/file/id-11134201-7r991-lpkldt6ouwstcd",
+              }}
+              style={{ width: 35, height: 35, borderRadius: 5 }}
+            />
             <View>
               <Text style={styles.styleProductText}>Produk</Text>
               <View style={styles.containerTextProduct}>
@@ -79,9 +85,12 @@ const ProductHome = () => {
               alignItems: "center",
             }}
           >
-            <View
-              style={{ width: 35, height: 35, backgroundColor: "grey" }}
-            ></View>
+            <Image
+              source={{
+                uri: "https://down-id.img.susercontent.com/file/id-11134201-7r991-lpkldt6ouwstcd",
+              }}
+              style={{ width: 35, height: 35, borderRadius: 5 }}
+            />
             <View>
               <Text style={styles.styleProductText}>Produk</Text>
               <View style={styles.containerTextProduct}>
