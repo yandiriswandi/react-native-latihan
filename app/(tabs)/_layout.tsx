@@ -21,6 +21,7 @@ import HomeIconActive from "../../assets/svg/bottomNavigator/homeActive.svg";
 import InventoryIconActive from "../../assets/svg/bottomNavigator/inventoryActive.svg";
 import NotificationIconActive from "../../assets/svg/bottomNavigator/notificationActive.svg";
 import AccountIconActive from "../../assets/svg/bottomNavigator/AccountActive.svg";
+import { useRouter } from "expo-router";
 
 const Screen1 = () => {
   return <View style={styles.screen1} />;
@@ -31,6 +32,7 @@ const Screen2 = () => {
 };
 
 export default function App() {
+  const router: any = useRouter();
   const _renderIcon = (routeName: any, selectedTab: any) => {
     let icon = "";
 
@@ -104,10 +106,7 @@ export default function App() {
       borderTopLeftRight
       renderCircle={({ selectedTab, navigate }) => (
         <Animated.View style={styles.btnCircleUp}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => Alert.alert("Click Action")}
-          >
+          <TouchableOpacity style={styles.button} onPress={() => router.push("kasir")}>
             <QrCode />
           </TouchableOpacity>
         </Animated.View>

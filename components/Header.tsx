@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants/theme";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useRouter } from "expo-router";
+import { RFValue } from "react-native-responsive-fontsize";
 
 interface initialProps {
   title: string;
@@ -40,6 +41,6 @@ const styles = StyleSheet.create({
     textAlign: "justify",
     color:COLORS.primary,
     fontFamily:"Poppins-SemiBold",
-    fontSize:14
+    fontSize:RFValue(14)
   },
 });

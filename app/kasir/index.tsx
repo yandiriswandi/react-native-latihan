@@ -1,24 +1,21 @@
+import { CollapsibleCustom } from "@/components/CollapsibleCustom";
+import { COLORS } from "@/constants/theme";
+import { Ionicons } from "@expo/vector-icons";
+import { Stack, useRouter } from "expo-router";
+import React, { useState } from "react";
 import {
+  FlatList,
+  Image,
+  StatusBar,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  Image,
-  FlatList,
-  StatusBar,
 } from "react-native";
-import React, { useState } from "react";
-import Container from "@/components/Container";
-import { Ionicons } from "@expo/vector-icons";
-import { COLORS } from "@/constants/theme";
-import { Router, Stack, useRouter } from "expo-router";
-import { RFValue } from "react-native-responsive-fontsize";
 import Animated, { FadeInDown } from "react-native-reanimated";
-import ModalComponent from "../page/component/ModalComponent";
-import { Collapsible } from "@/components/Collapsible";
-import { CollapsibleCustom } from "@/components/CollapsibleCustom";
-import { width } from "react-native-size-scaling";
+import { RFValue } from "react-native-responsive-fontsize";
+// import App from "../(tabs)/_layout";
 
 interface filterType {
   name: string;
@@ -192,7 +189,7 @@ const Cashier = () => {
                 color: "white",
                 fontSize: RFValue(13),
               }}
-              onPress={() => router.push("scan")}
+              onPress={() => router.push("kasir/chooseProduct")}
             >
               Lanjutkan
             </Text>

@@ -7,6 +7,7 @@ import {
   Dimensions,
   FlatList,
   Image,
+  Modal,
   StyleSheet,
   Text,
   TextInput,
@@ -16,6 +17,7 @@ import {
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { RFValue } from "react-native-responsive-fontsize";
 import EllipsisIcon from "../../assets/svg/ellipsis.svg";
+import { useRouter } from "expo-router";
 const { width } = Dimensions.get("window");
 
 interface filterType {
@@ -30,9 +32,16 @@ const Products = () => {
     { name: "Terbaru", value: "" },
     { name: "Nonaktif", value: 5 },
   ];
+  const router: any = useRouter();
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
+  };
+
   const [product, setProduct] = useState([
-    { name: "product 1", price: "10000", stock: 20000 },
-    { name: "product 2", price: "10000", stock: 20000 },
+    { name: "product 1", price: "10000", stock: 20000, id: "hallo" },
+    { name: "product 2", price: "10000", stock: 20000, id: "dimana" },
   ]);
   const [active, setActive] = useState<filterType>({
     name: "filter",
@@ -43,6 +52,9 @@ const Products = () => {
     price: false,
   });
 
+  const toggleModalFIlter = () => {
+    setModalVisible(!modalVisible);
+  };
 
   const renderItem = ({ item }: { item: filterType }) => {
     const handleClick = () => {
@@ -114,7 +126,9 @@ const Products = () => {
           >
             <Text style={styles.textButton}>Change Price</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => router.push(`product/productDetail/${item.id}`)}
+          >
             <EllipsisIcon />
           </TouchableOpacity>
         </View>
@@ -131,14 +145,57 @@ const Products = () => {
 
   return (
     <Container style={{ bakgroundColor: "#F2F3F4" }}>
+      <TouchableOpacity
+        style={styles.containerModalFilter}
+        onPressOut={toggleModalFIlter}
+      >
+        <Modal
+          visible={modalVisible}
+          animationType="fade"
+          transparent={true}
+          onRequestClose={toggleModalFIlter}
+        >
+          <View style={styles.modalOverlayModalFilter}>
+            <View style={styles.modalContentModalFilter}>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text style={styles.modalTextModalFilter}>Short</Text>
+                <Ionicons
+                  name="close-sharp"
+                  size={25}
+                  color={COLORS.primary}
+                  onPress={toggleModal}
+                />
+              </View>
+              <FlatList
+                data={filter}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.name}
+                ItemSeparatorComponent={ItemSeparator}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+              />
+            </View>
+          </View>
+        </Modal>
+      </TouchableOpacity>
       <View style={styles.containerTop}>
         <View style={styles.header}>
           <Text style={styles.textHeader}>List Product</Text>
           <View style={styles.containerIcon}>
-            <TouchableOpacity style={styles.plus}>
+            <TouchableOpacity
+              style={styles.plus}
+              onPress={() => router.push("product/productAdd")}
+            >
               <Ionicons name="add-outline" style={styles.add} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
               <EllipsisIcon />
             </TouchableOpacity>
           </View>
@@ -164,7 +221,7 @@ const Products = () => {
         <FlatList
           data={product}
           renderItem={renderItemProduct}
-          keyExtractor={(item) => item.name}
+          keyExtractor={(item) => item.id}
           ItemSeparatorComponent={ItemSeparatorProduct} // Menggunakan komponen pemisah
         />
       </View>
@@ -436,5 +493,44 @@ const styles = StyleSheet.create({
     fontSize: 20,
     position: "absolute",
     right: 0,
+  },
+
+  //modal
+  containerModalFilter: {},
+  buttonModalFilter: {
+    backgroundColor: "#2196F3",
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonTextModalFilter: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  modalOverlayModalFilter: {
+    flex: 1,
+    justifyContent: "flex-start", // Aligns modal content to the top
+    // backgroundColor: "rgba(0, 0, 0, 0.5)", // Transparent black background
+  },
+  modalContentModalFilter: {
+    backgroundColor: "#fff",
+    padding: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    width: "100%",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+  modalTextModalFilter: {
+    fontSize: RFValue(16),
+    fontFamily: "Poppins-SemiBold",
+    color: COLORS.primary,
+  },
+  closeButtonModalFilter: {
+    backgroundColor: "#FF5252",
+    padding: 10,
+    borderRadius: 5,
   },
 });

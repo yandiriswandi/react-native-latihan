@@ -22,13 +22,13 @@ interface typeData {
   name: string;
   icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   empty?: boolean; // optional property
-  route?:string
+  route?: string;
 }
 const menuData = [
   { id: "1", name: "Product", icon: Product, route: "product" },
-  { id: "2", name: "Stock", icon: Stock },
+  { id: "2", name: "Stock", icon: Stock, route: "kasir" },
   { id: "3", name: "Invoice", icon: Invoice },
-  { id: "4", name: "Transaction", icon: Transaction ,route: "cashier"},
+  { id: "4", name: "Transaction", icon: Transaction, route: "cashier" },
   { id: "5", name: "Customer", icon: Customer },
   { id: "7", name: "Report", icon: Report },
 ];
