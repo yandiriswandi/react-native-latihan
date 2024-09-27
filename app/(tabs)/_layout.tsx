@@ -22,6 +22,7 @@ import InventoryIconActive from "../../assets/svg/bottomNavigator/inventoryActiv
 import NotificationIconActive from "../../assets/svg/bottomNavigator/notificationActive.svg";
 import AccountIconActive from "../../assets/svg/bottomNavigator/AccountActive.svg";
 import { useRouter } from "expo-router";
+import Profile from "../profile";
 
 const Screen1 = () => {
   return <View style={styles.screen1} />;
@@ -130,7 +131,7 @@ export default function App() {
       />
       <CurvedBottomBarExpo.Screen
         name="Account"
-        component={() => <Screen2 />}
+        component={() => <Profile />}
         position="RIGHT"
       />
     </CurvedBottomBarExpo.Navigator>

@@ -92,7 +92,7 @@ const ChooseProduct = () => {
                   color: "white",
                   fontSize: RFValue(13),
                 }}
-                onPress={() => router.push("kasir/chooseProduct")}
+                onPress={() => router.push("kasir/detailTransaction")}
               >
                 Lanjutkan
               </Text>
