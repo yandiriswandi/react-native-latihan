@@ -16,8 +16,12 @@ import AccountIconActive from "../assets/svg/bottomNavigator/AccountActive.svg";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useState } from "react";
 // import _ from "lodash";
+interface PropsType {
+  backButton?: boolean;
+}
 
-const Navbar = () => {
+const Navbar = (props: PropsType) => {
+  const { backButton } = props;
   const router: any = useRouter();
   const pathname = usePathname(); //
   const [menu, setMenu] = useState([
@@ -31,14 +35,14 @@ const Navbar = () => {
     {
       id: "2",
       name: "Cashier",
-      route: "kasir",
+      route: "/kasir",
       icon: CashierIcon,
       iconActive: CashierActiveIcon,
     },
     {
       id: "3",
       name: "Profile",
-      route: "profile",
+      route: "/profile",
       icon: AccountIcon,
       iconActive: AccountIconActive,
     },
@@ -47,9 +51,11 @@ const Navbar = () => {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <View style={styles.wrapperBack}>
-          <Ionicons size={20} name="chevron-back-sharp" />
-        </View>
+        {backButton && (
+          <TouchableOpacity style={styles.wrapperBack} onPress={()=>router.back()}>
+            <Ionicons size={20} name="chevron-back-sharp" />
+          </TouchableOpacity>
+        )}
       </View>
       <View style={styles.navbar}>
         {menu?.map((item: any) => {
@@ -94,10 +100,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 20,
+    paddingVertical: 10,
     borderBottomColor: COLORS.grey_100,
     borderBottomWidth: 0.5,
     borderStyle: "solid",
-    paddingVertical: 10,
   },
   left: {},
   wrapperBack: {
@@ -128,11 +134,11 @@ const styles = StyleSheet.create({
     gap: 10,
     alignItems: "center",
   },
-  img:{
-    width:40,
-    height:40,
-    borderRadius:100
-  }
+  img: {
+    width: 40,
+    height: 40,
+    borderRadius: 100,
+  },
 });
 
 export default Navbar;

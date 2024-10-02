@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { RFValue } from "react-native-responsive-fontsize";
-import { COLORS } from "@/constants/theme";
+import { COLORS, SIZES } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 
 const ProductCard = () => {
@@ -28,7 +28,7 @@ const ProductCard = () => {
           />
           <View
             style={{
-              flexDirection:"column",
+              flexDirection: "column",
               gap: 2,
               flex: 1,
               justifyContent: "space-between",
@@ -74,14 +74,14 @@ export default ProductCard;
 const styles = StyleSheet.create({
   containerProduct: {
     paddingVertical: 10,
-    borderBottomColor:COLORS.grey_100,
-    borderBottomWidth:0.8,
+    borderBottomColor: COLORS.grey_100,
+    borderBottomWidth: 0.8,
     backgroundColor: "white",
   },
   card: {
     flexDirection: "row",
     gap: 20,
-    flex:1
+    flex: 1,
   },
   imageProduct: {
     width: 76,
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "Poppins-Regular",
     fontSize: RFValue(12),
-    color:COLORS.primary
+    color: COLORS.primary,
   },
   containerCount: {
     flexDirection: "row",
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   containerPlusMin: { flexDirection: "row", alignItems: "center", gap: 10 },
   textCount: {
     fontFamily: "Poppins-SemiBold",
-    fontSize: RFValue(16),
+    fontSize: SIZES.isTablet ? RFValue(8) : RFValue(16),
   },
   inputPrice: {
     borderBottomColor: "black",
@@ -135,6 +135,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems:"center"
+    alignItems: "center",
   },
 });
