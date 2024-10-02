@@ -12,17 +12,18 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import HomeScreen from "./index";
 import { RFValue } from "react-native-responsive-fontsize";
 import QrCode from "../../assets/svg/bottomNavigator/qr.svg";
-import { COLORS } from "@/constants/theme";
+import { COLORS, SIZES } from "@/constants/theme";
 import HomeIcon from "../../assets/svg/bottomNavigator/home.svg";
-import InventoryIcon from "../../assets/svg/bottomNavigator/inventory.svg";
+import InventoryIcon from "../../assets/svg/bottomNavigator/Vector.svg";
 import NotificationIcon from "../../assets/svg/bottomNavigator/notification.svg";
 import AccountIcon from "../../assets/svg/bottomNavigator/Account.svg";
 import HomeIconActive from "../../assets/svg/bottomNavigator/homeActive.svg";
-import InventoryIconActive from "../../assets/svg/bottomNavigator/inventoryActive.svg";
+import InventoryIconActive from "../../assets/svg/bottomNavigator/VectorActive.svg";
 import NotificationIconActive from "../../assets/svg/bottomNavigator/notificationActive.svg";
 import AccountIconActive from "../../assets/svg/bottomNavigator/AccountActive.svg";
 import { useRouter } from "expo-router";
 import Profile from "../profile";
+import Notification from "../notification/Notification";
 
 const Screen1 = () => {
   return <View style={styles.screen1} />;
@@ -96,45 +97,54 @@ export default function App() {
   };
 
   return (
-    <CurvedBottomBarExpo.Navigator
-      type="DOWN"
-      style={styles.bottomBar}
-      shadowStyle={styles.shawdow}
-      height={55}
-      circleWidth={50}
-      bgColor="#ECEFF1"
-      initialRouteName="title1"
-      borderTopLeftRight
-      renderCircle={({ selectedTab, navigate }) => (
-        <Animated.View style={styles.btnCircleUp}>
-          <TouchableOpacity style={styles.button} onPress={() => router.push("kasir")}>
-            <QrCode />
-          </TouchableOpacity>
-        </Animated.View>
+    <>
+      {!SIZES.isTablet ? (
+        <CurvedBottomBarExpo.Navigator
+          type="DOWN"
+          style={styles.bottomBar}
+          shadowStyle={styles.shawdow}
+          height={55}
+          circleWidth={50}
+          bgColor="#ECEFF1"
+          initialRouteName="title1"
+          borderTopLeftRight
+          renderCircle={({ selectedTab, navigate }) => (
+            <Animated.View style={styles.btnCircleUp}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => router.push("kasir")}
+              >
+                <QrCode />
+              </TouchableOpacity>
+            </Animated.View>
+          )}
+          tabBar={renderTabBar}
+        >
+          <CurvedBottomBarExpo.Screen
+            name="Home"
+            position="LEFT"
+            component={() => <HomeScreen />}
+          />
+          <CurvedBottomBarExpo.Screen
+            name="Inventory"
+            position="LEFT"
+            component={() => <HomeScreen />}
+          />
+          <CurvedBottomBarExpo.Screen
+            name="Notification"
+            component={() => <Notification />}
+            position="RIGHT"
+          />
+          <CurvedBottomBarExpo.Screen
+            name="Account"
+            component={() => <Profile />}
+            position="RIGHT"
+          />
+        </CurvedBottomBarExpo.Navigator>
+      ) : (
+        <HomeScreen />
       )}
-      tabBar={renderTabBar}
-    >
-      <CurvedBottomBarExpo.Screen
-        name="Home"
-        position="LEFT"
-        component={() => <HomeScreen />}
-      />
-      <CurvedBottomBarExpo.Screen
-        name="Inventory"
-        position="LEFT"
-        component={() => <HomeScreen />}
-      />
-      <CurvedBottomBarExpo.Screen
-        name="Notification"
-        component={() => <Screen2 />}
-        position="RIGHT"
-      />
-      <CurvedBottomBarExpo.Screen
-        name="Account"
-        component={() => <Profile />}
-        position="RIGHT"
-      />
-    </CurvedBottomBarExpo.Navigator>
+    </>
   );
 }
 

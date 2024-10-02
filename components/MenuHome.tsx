@@ -29,7 +29,7 @@ const menuData = [
   { id: "2", name: "Stock", icon: Stock, route: "kasir" },
   { id: "3", name: "Invoice", icon: Invoice },
   { id: "4", name: "Transaction", icon: Transaction, route: "cashier" },
-  { id: "5", name: "Customer", icon: Customer },
+  { id: "5", name: "Customer", icon: Customer ,route:"customer"},
   { id: "7", name: "Report", icon: Report },
 ];
 
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     flex: 1, // Mengambil ruang penuh dari kolom yang tersedia
     flexDirection: "column",
     alignItems: "center",
-    marginVertical: 10,
+    marginVertical:5,
   },
   invisible: {
     backgroundColor: "transparent",

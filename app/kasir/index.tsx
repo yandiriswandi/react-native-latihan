@@ -1,5 +1,5 @@
 import { CollapsibleCustom } from "@/components/CollapsibleCustom";
-import { COLORS } from "@/constants/theme";
+import { COLORS, SIZES } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -124,79 +124,88 @@ const Cashier = () => {
   };
   const statusBarHeight = StatusBar.currentHeight || 0;
   return (
-    <View style={styles.containerMain}>
-      <Stack.Screen options={{ headerShown: false }} />
-      <View
-        style={{
-          backgroundColor: COLORS.primary,
-        }}
-      >
-        <View
-          style={{
-            height: statusBarHeight,
-          }}
-        ></View>
-        <Text
-          style={{
-            paddingHorizontal: 20,
-            fontFamily: "Poppins-SemiBold",
-            fontSize: RFValue(16),
-            color: "white",
-            paddingBottom: 10,
-            marginTop: 20,
-          }}
-        >
-          Kasir
-        </Text>
-      </View>
-      <View style={styles.containerFilter}>
-        <View>
-          <FlatList
-            data={filter}
-            renderItem={renderItemFilter}
-            keyExtractor={(item) => item.name}
-            ItemSeparatorComponent={ItemSeparatorFilter} // Menggunakan komponen pemisah
-            horizontal={true} // Mengatur agar FlatList digulir secara horizontal
-            showsHorizontalScrollIndicator={false} // Opsional: Menyembunyikan indikator gulir horizontal
-          />
-        </View>
-        <View style={styles.containerHeader}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Search"
-            keyboardType="web-search" // Simulasi untuk pencarian
-            returnKeyType="search" // Mengubah tombol return menjadi "Search"
-          />
-          <TouchableOpacity style={styles.wrapperBarcode}>
-            <Image source={require("../../assets/images/barcode.png")} />
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={{ height: 13, backgroundColor: COLORS.mobile }} />
-      <View style={styles.container}>
-        <FlatList
-          data={product}
-          renderItem={renderItemProduct}
-          keyExtractor={(item) => item.name}
-          showsVerticalScrollIndicator={false}
-          numColumns={2}
-        />
-        <Animated.View entering={FadeInDown.delay(100).duration(800)}>
-          <TouchableOpacity style={[styles.button, { marginTop: 10 }]}>
+    <>
+      {SIZES.isTablet ? (
+        <View></View>
+      ) : (
+        <View style={styles.containerMain}>
+          <Stack.Screen options={{ headerShown: false }} />
+          <View
+            style={{
+              backgroundColor: COLORS.primary,
+            }}
+          >
+            <View
+              style={{
+                height: statusBarHeight,
+              }}
+            ></View>
             <Text
               style={{
-                fontFamily: "Poppins-Medium",
+                paddingHorizontal: 20,
+                fontFamily: "Poppins-SemiBold",
+                fontSize: RFValue(16),
                 color: "white",
-                fontSize: RFValue(13),
+                paddingBottom: 10,
+                marginTop: 20,
               }}
-              onPress={() => router.push("kasir/chooseProduct")}
             >
-              Lanjutkan
+              Kasir
             </Text>
-          </TouchableOpacity>
-        </Animated.View>
-      </View>
-    </View>
+          </View>
+          <View style={styles.containerFilter}>
+            <View>
+              <FlatList
+                data={filter}
+                renderItem={renderItemFilter}
+                keyExtractor={(item) => item.name}
+                ItemSeparatorComponent={ItemSeparatorFilter} // Menggunakan komponen pemisah
+                horizontal={true} // Mengatur agar FlatList digulir secara horizontal
+                showsHorizontalScrollIndicator={false} // Opsional: Menyembunyikan indikator gulir horizontal
+              />
+            </View>
+            <View style={styles.containerHeader}>
+              <TextInput
+                style={styles.textInput}
+                placeholder="Search"
+                keyboardType="web-search" // Simulasi untuk pencarian
+                returnKeyType="search" // Mengubah tombol return menjadi "Search"
+              />
+              <TouchableOpacity
+                style={styles.wrapperBarcode}
+                onPress={() => router.push("scan")}
+              >
+                <Image source={require("../../assets/images/barcode.png")} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={{ height: 13, backgroundColor: COLORS.mobile }} />
+          <View style={styles.container}>
+            <FlatList
+              data={product}
+              renderItem={renderItemProduct}
+              keyExtractor={(item) => item.name}
+              showsVerticalScrollIndicator={false}
+              numColumns={2}
+            />
+            <Animated.View entering={FadeInDown.delay(100).duration(800)}>
+              <TouchableOpacity style={[styles.button, { marginTop: 10 }]}>
+                <Text
+                  style={{
+                    fontFamily: "Poppins-Medium",
+                    color: "white",
+                    fontSize: RFValue(13),
+                  }}
+                  onPress={() => router.push("kasir/chooseProduct")}
+                >
+                  Lanjutkan
+                </Text>
+              </TouchableOpacity>
+            </Animated.View>
+          </View>
+        </View>
+      )}
+    </>
   );
 };
 

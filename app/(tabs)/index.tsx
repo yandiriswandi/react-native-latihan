@@ -1,8 +1,4 @@
-import {
-  ScrollView,
-  StyleSheet,
-  View
-} from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
 import CardHome from "@/components/CardHome";
 import HeaderStatusBar from "@/components/HeaderStatusBar";
@@ -11,6 +7,9 @@ import ProductHome from "@/components/ProductHome";
 import { Stack, useRouter } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Interset from "../../assets/svg/Intersect.svg";
+import SwiperHome from "@/components/SwiperHome";
+import HelpCenter from "@/components/HelpCenter";
+import Navbar from "@/components/Navbar";
 
 export default function HomeScreen({ navigation }: any) {
   const router: any = useRouter();
@@ -30,11 +29,14 @@ export default function HomeScreen({ navigation }: any) {
       <ScrollView style={styles.container}>
         <Stack.Screen options={{ headerShown: false }}></Stack.Screen>
         <HeaderStatusBar />
+      <Navbar />
         <View style={styles.card}>
           <CardHome />
           <MenuHome />
-          <Interset style={{ marginTop: 100 }} />
+          {/* <Interset style={{ marginTop: 100 }} /> */}
         </View>
+        <SwiperHome />
+        <HelpCenter />
         <ProductHome />
       </ScrollView>
     </GestureHandlerRootView>
