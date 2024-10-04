@@ -2,12 +2,17 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Container from "@/components/Container";
 import HeaderLeft from "@/components/HeaderLeft";
-import { COLORS } from "@/constants/theme";
+import { COLORS, SIZES } from "@/constants/theme";
+import Navbar from "@/components/Navbar";
 
 const Notification = () => {
   return (
     <Container>
-      <HeaderLeft title="Notification" />
+      {SIZES.isTablet ? (
+        <Navbar backButton={true} />
+      ) : (
+        <HeaderLeft title="Notification" />
+      )}
       <View style={styles.container}>
         <View style={styles.containerCard}>
           <View style={styles.wrapperImage}>
@@ -19,7 +24,9 @@ const Notification = () => {
           </View>
           <View style={styles.containerText}>
             <Text style={styles.text}>Dapat Emas Periode Sept - Des 2024</Text>
-            <Text style={[styles.text,{color:"#9E9E9E"}]}>04 Oktober 2024 ● 08:45 </Text>
+            <Text style={[styles.text, { color: "#9E9E9E" }]}>
+              04 Oktober 2024 ● 08:45{" "}
+            </Text>
           </View>
         </View>
       </View>
@@ -34,6 +41,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginTop: 20,
     padding: 20,
+    flex:1
   },
   containerCard: {
     flexDirection: "row",
@@ -53,12 +61,12 @@ const styles = StyleSheet.create({
   },
   containerText: {
     flex: 1,
-    flexDirection:"column",
-    justifyContent:"space-between"
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
   text: {
     fontFamily: "Poppins-Regular",
     fontSize: 12,
-    color:"#273240"
+    color: "#273240",
   },
 });

@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     flexDirection: "column",
     justifyContent: "center",
-    borderRadius: 10,
+    borderBottomEndRadius: 10,
+    borderBottomStartRadius: 10,
     zIndex: 10,
   },
   hello: {

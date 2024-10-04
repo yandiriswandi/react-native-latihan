@@ -15,6 +15,7 @@ import Animated, {
 } from "react-native-reanimated";
 import Google from "../../assets/images/google.svg";
 import {RFValue} from 'react-native-responsive-fontsize';
+import Svg, { Path } from 'react-native-svg';
 
 const index = () => {
   const [visible, setVisible] = useState(false);

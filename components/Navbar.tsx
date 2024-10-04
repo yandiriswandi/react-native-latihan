@@ -46,6 +46,13 @@ const Navbar = (props: PropsType) => {
       icon: AccountIcon,
       iconActive: AccountIconActive,
     },
+    {
+      id: "4",
+      name: "Notification",
+      route: "/notification",
+      icon: NotificationIcon,
+      iconActive: NotificationIconActive,
+    },
   ]);
 
   return (
@@ -104,6 +111,8 @@ const styles = StyleSheet.create({
     borderBottomColor: COLORS.grey_100,
     borderBottomWidth: 0.5,
     borderStyle: "solid",
+    backgroundColor:"white",
+    zIndex:50
   },
   left: {},
   wrapperBack: {

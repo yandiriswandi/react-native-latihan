@@ -23,7 +23,7 @@ import NotificationIconActive from "../../assets/svg/bottomNavigator/notificatio
 import AccountIconActive from "../../assets/svg/bottomNavigator/AccountActive.svg";
 import { useRouter } from "expo-router";
 import Profile from "../profile";
-import Notification from "../notification/Notification";
+import Notification from "../notification";
 
 const Screen1 = () => {
   return <View style={styles.screen1} />;

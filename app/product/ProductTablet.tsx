@@ -7,7 +7,7 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Container from "@/components/Container";
 import Navbar from "@/components/Navbar";
 import { TextInput } from "react-native-gesture-handler";
@@ -15,8 +15,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants/theme";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useRouter } from "expo-router";
-import Animated, { FadeInDown } from "react-native-reanimated";
-import ProductCard from "./orderProduct/component/ProductCard";
+import EllipsisIcon from "../../assets/svg/ellipsis.svg";
+//   import ProductCard from "./orderProduct/component/ProductCard";
 
 interface filterType {
   name: string;
@@ -29,9 +29,35 @@ const numColumns = 4;
 const devider = (width * 66) / 100;
 const itemWidth = devider / numColumns; // Lebar setiap item
 
-const CashierTablet = (props: any) => {
+interface filterType {
+  name: string;
+  value: string | number;
+}
+
+const ProductTablet = (props: any) => {
   const router: any = useRouter();
-  const { product, setActive, active, statusBarHeight, filter } = props;
+  const [active, setActive] = useState<filterType>({
+    name: "filter",
+    value: "",
+  });
+  const filter = [
+    { name: "filter", value: "" },
+    { name: "Aktif", value: 20 },
+    { name: "Terbaru", value: "" },
+    { name: "Nonaktif", value: 5 },
+  ];
+  const [product, setProduct] = useState([
+    { name: "product 1", price: "10000", stock: 20000, id: 1 },
+    { name: "product 2", price: "10000", stock: 20000, id: 2 },
+    { name: "product 2", price: "10000", stock: 20000, id: 3 },
+    { name: "product 2", price: "10000", stock: 20000, id: 4 },
+    { name: "product 2", price: "10000", stock: 20000, id: 5 },
+    { name: "product 2", price: "10000", stock: 20000, id: 6 },
+    { name: "product 2", price: "10000", stock: 20000, id: 7 },
+    { name: "product 2", price: "10000", stock: 20000, id: 8 },
+    { name: "product 2", price: "10000", stock: 20000, id: 9 },
+    { name: "product 2", price: "10000", stock: 20000, id: 10 },
+  ]);
   const renderItemFilter = ({ item }: { item: filterType }) => {
     const handleClick = () => {
       setActive(item);
@@ -94,6 +120,25 @@ const CashierTablet = (props: any) => {
           <Text style={styles.textPrice}>{item.price}</Text>
           <Text style={styles.textStock}>stock:{item.stock}</Text>
         </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.buttonProduct}
+            // onPress={() => setVisible({ ...visible, stock: !visible.stock })}
+          >
+            <Text style={styles.textButton}>Change Price</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonProduct}
+            // onPress={() => setVisible({ ...visible, price: !visible.price })}
+          >
+            <Text style={styles.textButton}>Change Price</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => router.push(`product/productDetail/${item.id}`)}
+          >
+            <EllipsisIcon />
+          </TouchableOpacity>
+        </View>
       </TouchableOpacity>
     );
   };
@@ -122,6 +167,17 @@ const CashierTablet = (props: any) => {
                 showsHorizontalScrollIndicator={false} // Opsional: Menyembunyikan indikator gulir horizontal
               />
             </View>
+            <View style={styles.containerIcon}>
+              <TouchableOpacity
+                style={styles.plus}
+                onPress={() => router.push("product/productAdd")}
+              >
+                <Ionicons name="add-outline" style={styles.add} />
+              </TouchableOpacity>
+              {/* <TouchableOpacity onPress={() => setModalVisible(true)}> */}
+              <EllipsisIcon />
+              {/* </TouchableOpacity> */}
+            </View>
           </View>
           <View style={styles.wrapperListProduct}>
             <FlatList
@@ -134,80 +190,12 @@ const CashierTablet = (props: any) => {
             />
           </View>
         </View>
-        <View style={styles.wrapperList}>
-          <View>
-            {/* <Text style={styles.textHeader}>Food</Text> */}
-            <View style={{padding:10}}>
-              <ProductCard />
-            </View>
-          </View>
-          <Animated.View
-            style={styles.card}
-            entering={FadeInDown.delay(100).duration(800)}
-          >
-            <View style={[styles.wrapperSelect, { marginBottom: 10 }]}>
-              <View style={styles.img}></View>
-              <View style={styles.wrapperTab}>
-                <View style={styles.wrapperText}>
-                  <Text style={styles.text}>Select Customer</Text>
-                  <Text style={styles.textDesc}>Klik untuk dipilih</Text>
-                </View>
-                <Ionicons
-                  name="chevron-forward-outline"
-                  color={"#5CD9F5"}
-                  size={26}
-                />
-              </View>
-            </View>
-            <TouchableOpacity
-              style={styles.wrapperSelect}
-              //   onPress={() => handleView("payment")}
-            >
-              <View style={styles.img}></View>
-              <View style={styles.wrapperTab}>
-                <View style={styles.wrapperText}>
-                  <Text style={styles.text}>Select Payment Metode</Text>
-                  <Text style={styles.textDesc}>Klik untuk dipilih</Text>
-                </View>
-                <Ionicons
-                  name="chevron-forward-outline"
-                  color={"#5CD9F5"}
-                  size={26}
-                />
-              </View>
-            </TouchableOpacity>
-            <View style={styles.containerText}>
-              <Text style={[styles.textTotal, { fontSize: RFValue(10) }]}>
-                Total
-              </Text>
-              <Text style={[styles.textTotal, { fontSize: RFValue(8) }]}>
-                Rp 99.000
-              </Text>
-            </View>
-            <Text style={[styles.textTotal, { fontSize: RFValue(8) }]}>
-              Dikirim ke Rekening ?
-            </Text>
-
-            <TouchableOpacity style={[styles.button, { marginTop: 10 }]}>
-              <Text
-                style={{
-                  fontFamily: "Poppins-Medium",
-                  color: "white",
-                  fontSize: RFValue(10),
-                }}
-                onPress={() => router.push("kasir/detailTransaction")}
-              >
-                Lanjutkan
-              </Text>
-            </TouchableOpacity>
-          </Animated.View>
-        </View>
       </View>
     </Container>
   );
 };
 
-export default CashierTablet;
+export default ProductTablet;
 
 const styles = StyleSheet.create({
   container: {
@@ -220,7 +208,6 @@ const styles = StyleSheet.create({
   wrapperProduct: {
     backgroundColor: COLORS.mobile,
     flex: 1,
-    width: "70%",
   },
   wrapperList: {
     borderLeftColor: COLORS.grey_100,
@@ -233,6 +220,7 @@ const styles = StyleSheet.create({
     borderBottomColor: COLORS.grey_100,
     borderBottomWidth: 0.5,
     flexDirection: "row",
+    paddingHorizontal: 20,
   },
   inputSearch: {
     paddingVertical: 10,
@@ -286,7 +274,7 @@ const styles = StyleSheet.create({
   wrapperListProduct: {
     flex: 1,
     paddingVertical: 10,
-    paddingLeft:10
+    paddingLeft: 10,
   },
   itemContainer: {
     justifyContent: "center",
@@ -299,7 +287,7 @@ const styles = StyleSheet.create({
   },
   imageProduct: {
     width: "100%", // Mengisi penuh lebar item
-    height: 100,
+    height: 130,
     aspectRatio: 1, // Membuat image berbentuk persegi
     // resizeMode: 'contain',
     borderRadius: 10,
@@ -386,5 +374,50 @@ const styles = StyleSheet.create({
     padding: 10,
     gap: 10,
     borderRadius: 16,
+  },
+  containerIcon: {
+    flexDirection: "row",
+    gap: 15,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  add: {
+    fontSize: RFValue(20),
+    color: COLORS.primary,
+  },
+  plus: {
+    paddingVertical: 2,
+    marginRight: 10,
+    paddingHorizontal: 4,
+    borderStyle: "solid",
+    borderColor: COLORS.grey_100,
+    borderWidth: 1,
+    borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonContainer: {
+    marginTop: 10,
+    flexDirection: "row",
+    gap: 10,
+    alignItems: "center",
+  },
+  buttonProduct: {
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    flex: 1,
+    borderColor: COLORS.grey_100,
+    borderStyle: "solid",
+    borderWidth: 0.5,
+    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textButton: {
+    fontFamily: "Poppins-Regular",
+    fontSize: RFValue(6),
+    color: COLORS.grey_100,
   },
 });
